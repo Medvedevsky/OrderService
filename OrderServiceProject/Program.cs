@@ -19,7 +19,7 @@ namespace OrderServiceProject
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var context = new GlobalContextService();
-            var singInView = new SingInView(context);
+            var singInView = new AuthorizationView(context);
             Application.Run(singInView);
         }
     }

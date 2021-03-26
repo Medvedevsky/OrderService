@@ -52,10 +52,10 @@ namespace OrderServiceProject.Views
                 MessageBox.Show("Выделите строку для удаления пользователя!");
                 return;
             }
-            var selectData = userDataGridView.SelectedRows[0].DataBoundItem as User;
+            var selectedData = userDataGridView.SelectedRows[0].DataBoundItem as User;
             int id = int.Parse(userDataGridView.SelectedRows[0].Cells[0].Value.ToString());
 
-            _context.User.Delete(id, selectData);
+            _context.User.Delete(id, selectedData);
             RefreshDataHandler();
         }
     }

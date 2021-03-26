@@ -11,10 +11,10 @@ using OrderServiceProject.Services;
 
 namespace OrderServiceProject.Views
 {
-    public partial class SingInView : Form
+    public partial class AuthorizationView : Form
     {
         private GlobalContextService _context;
-        public SingInView(GlobalContextService context)
+        public AuthorizationView(GlobalContextService context)
         {
             InitializeComponent();
             _context = context;
@@ -45,7 +45,7 @@ namespace OrderServiceProject.Views
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void exitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

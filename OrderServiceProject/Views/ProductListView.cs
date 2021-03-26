@@ -24,8 +24,6 @@ namespace OrderServiceProject.Views
 
         }
 
-       
-
         private void ProductListView_Load(object sender, EventArgs e)
         {
             RefreshDataHandler();
@@ -64,11 +62,10 @@ namespace OrderServiceProject.Views
                 MessageBox.Show("Выделите строку для ее удаления!");
                 return;
             }
-            var product = productDataGridView.SelectedRows[0].DataBoundItem as Product;
 
+            var selectedRow = productDataGridView.SelectedRows[0].DataBoundItem as Product;
             int id = int.Parse(productDataGridView.SelectedRows[0].Cells[0].Value.ToString());
-
-            _context.Product.Delete(id, product);
+            _context.Product.Delete(id, selectedRow);
 
             RefreshDataHandler();
         }
@@ -94,14 +91,14 @@ namespace OrderServiceProject.Views
                 MessageBox.Show("Выделите строку для ее изменения!");
                 return;
             }
-            var selectRow = productDataGridView.SelectedRows[0].DataBoundItem as Product;
+            var selectedRow = productDataGridView.SelectedRows[0].DataBoundItem as Product;
 
             var editProductView = new EditProductView();
-            var res = editProductView.ShowDialog(selectRow);
+            var res = editProductView.ShowDialog(selectedRow);
 
             if(res == DialogResult.OK)
             {
-                _context.Product.ChangeData(selectRow.Id, editProductView.ChangeData);
+                _context.Product.ChangeData(selectedRow.Id, editProductView.ChangeData);
                 RefreshDataHandler();
             }
 
@@ -122,8 +119,8 @@ namespace OrderServiceProject.Views
             }
             else
             {
-                AdminMenuView menuView = new AdminMenuView(_context);
-                menuView.Visible = true;
+                AdminMenuView adminMenuView = new AdminMenuView(_context);
+                adminMenuView.Visible = true;
             }
         }
 
@@ -132,8 +129,8 @@ namespace OrderServiceProject.Views
             
             try
             {
-                var product = productDataGridView.SelectedRows[0].DataBoundItem as Product;
-                _context.Product.DoOrder(_context.Authorization.Me, product);
+                var selectedRow = productDataGridView.SelectedRows[0].DataBoundItem as Product;
+                _context.Product.DoOrder(_context.Authorization.Me, selectedRow);
                 MessageBox.Show("Вы совершили заказ");
             }
             catch

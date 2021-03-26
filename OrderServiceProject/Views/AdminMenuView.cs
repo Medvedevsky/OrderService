@@ -39,14 +39,14 @@ namespace OrderServiceProject.Views
 
         private void AdminMenuView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SingInView singInView = new SingInView(_contex);
+            AuthorizationView singInView = new AuthorizationView(_contex);
             singInView.Visible = true;
         }
 
         private void userButton_Click(object sender, EventArgs e)
         {
-            var userListWindow = new UserListView(_contex);
-            userListWindow.Show();
+            var userListView = new UserListView(_contex);
+            userListView.Show();
             this.Hide();
         }
     }

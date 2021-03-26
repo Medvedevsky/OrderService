@@ -21,14 +21,14 @@ namespace OrderServiceProject.Views
 
         private void UserMenuView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SingInView singInView = new SingInView(_context);
+            AuthorizationView singInView = new AuthorizationView(_context);
             singInView.Visible = true;
         }
 
         private void productButton_Click(object sender, EventArgs e)
         {
-            var clientProductWindow = new ProductListView(_context);
-            clientProductWindow.Show();
+            var clientProductView = new ProductListView(_context);
+            clientProductView.Show();
             this.Hide();
         }
 

@@ -33,25 +33,19 @@ namespace OrderServiceProject.Views
 
         public void RefreshDataHandler()
         {
-            if (_context.Authorization.Me.Role == "client")
+            try
             {
-                orderDataGridView.DataSource = _context.Order.GetOnlyClient(_context.Authorization.Me);
+                if (_context.Authorization.Me.Role == "client")
+                {
+                    orderDataGridView.DataSource = _context.Order.GetOnlyClient(_context.Authorization.Me);
+                }
+                else
+                    orderDataGridView.DataSource = _context.Order.GetAll();
             }
-            else
-                orderDataGridView.DataSource = _context.Order.GetAll();
-            //try
-            //{
-            //    if(_context.Authorization.Me.Role == "client")
-            //    {
-            //        orderDataGridView.DataSource = _context.Order.GetOnlyClient(_context.Authorization.Me);
-            //    }
-            //    else
-            //    orderDataGridView.DataSource = _context.Order.GetAll();
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Ошибка при считывании данных");
-            //}
+            catch
+            {
+                MessageBox.Show("Ошибка при считывании данных");
+            }
         }
 
         private void orderDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -92,13 +86,13 @@ namespace OrderServiceProject.Views
         {
             if (_context.Authorization.Me.Role == "client")
             {
-                ClientMenuView clientMenu = new ClientMenuView(_context);
-                clientMenu.Visible = true;
+                ClientMenuView clientMenuView = new ClientMenuView(_context);
+                clientMenuView.Visible = true;
             }
             else
             {
-                AdminMenuView menuView = new AdminMenuView(_context);
-                menuView.Visible = true;
+                AdminMenuView adminMenuView = new AdminMenuView(_context);
+                adminMenuView.Visible = true;
             }
         }
 
